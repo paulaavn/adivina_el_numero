@@ -13,23 +13,28 @@ function getRandomNumber(max) {
         const choosenNumber = inputResult.value
         console.log(choosenNumber)
     }
+
+    
+
     
     function changeClue(){
-
-    if (getRandomNumber() < selectNumber){
-        clueBox.innerHTML = 'Demasiado bajo';
+    const clueText = clueBox.innerHTML;
+    let numberSelected = inputResult.value;
+   
+    if (number < numberSelected){
+        clueText = 'Demasiado bajo';
     }
-    else if (number > parseInt(selectedNumber)){
-        clueBox.innerHTML = 'Demasiado bajo';
+    else if (getRandomNumber() > numberSelected){
+        clueText = 'Demasiado bajo';
     }
-    else if (number === parseInt(selectedNumber)){
-        clueBox.innerHTML = 'Has ganado campeona';
+    else if (getRandomNumber() === numberSelected){
+        clueText= 'Has ganado campeona';
     }
-    else if (parseInt(selectedNumber) < 1){
-        clueBox.innerHTML = 'El número debe estar entre 1 y 100';
+    else if (numberSelected < 1){
+        clueText = 'El número debe estar entre 1 y 100';
     }
-    else if (parseInt(selectedNumber) > 100){
-        clueBox.innerHTML = 'El número debe estar entre 1 y 100';
+    else if (numberSelected > 100){
+        clueText= 'El número debe estar entre 1 y 100';
     }
 }
 
