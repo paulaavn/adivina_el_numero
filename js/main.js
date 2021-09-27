@@ -1,54 +1,56 @@
+'use strict';
+
+const button = document.querySelector(".js-button");
+const selectedNumber = document.querySelector(".js-inputNumber");
+const clueBox = document.querySelector(".js-clue");
+const triedBox = document.querySelector(".js-tried");
+
+
 function getRandomNumber(max) {
-    const number = Math.ceil(Math.random() * 100);
-    return number;
-    }
-    console.log(getRandomNumber());
-
-    const inputResult = document.querySelector(".js-inputNumber");
-    const button = document.querySelector(".js-button");
-    const clueBox = document.querySelector(".js-clue");
-    const triedBox = document.querySelector(".js-tried");
- 
-     function selectNumber(){
-        const choosenNumber = inputResult.value
-        console.log(choosenNumber)
-    }
-
-    
-
-    
-    function changeClue(){
-    const clueText = clueBox.innerHTML;
-    let numberSelected = inputResult.value;
-   
-    if (number < numberSelected){
-        clueText = 'Demasiado bajo';
-    }
-    else if (getRandomNumber() > numberSelected){
-        clueText = 'Demasiado bajo';
-    }
-    else if (getRandomNumber() === numberSelected){
-        clueText= 'Has ganado campeona';
-    }
-    else if (numberSelected < 1){
-        clueText = 'El número debe estar entre 1 y 100';
-    }
-    else if (numberSelected > 100){
-        clueText= 'El número debe estar entre 1 y 100';
-    }
+    return Math.ceil(Math.random() * max);
 }
-
-    button.addEventListener('click', selectNumber)
-
-
-let counter = 0;
+const randomNumber = getRandomNumber(100);
+console.log(randomNumber);
 
 
-button.onclick = function countNumberOfTries(){
-    counter ++;
-    triedBox.innerHTML = 'Número de intentos: ' + counter
+
+let counterClick = 0;
+function counter() {
+    counterClick++;
+    triedBox.innerHTML = `Número de intentos: ${counterClick}`
+
 }
 
 
+function handleClickButton(event) {
+    event.preventDefault();
+    const inputNumber = parseInt(selectedNumber.value);
 
-console.log(counter)
+    if (inputNumber < 1 || inputNumber > 100) {
+        clueBox.innerHTML = "El número debe estar entre 1 y 100";
+    } else if (inputNumber < randomNumber) {
+        clueBox.innerHTML = "Pista: Demasiado bajo"
+    } else if (inputNumber > randomNumber) {
+        clueBox.innerHTML = "Pista: Demasiado alto"
+    } else {
+        clueBox.innerHTML = "Has ganado campeona!!!"
+    };
+    counter();
+
+};
+
+
+button.addEventListener("click", handleClickButton);
+
+
+
+
+
+
+
+
+
+
+
+
+
